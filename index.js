@@ -18,7 +18,7 @@ router.get('/ping', function (ctx, next) {
 });
 
 router.get('/online', function (ctx, next) {
-  ctx.body = '';
+  ctx.body = {};
   const online = ctx.app.context.online;
   for (const hostname in online) {
     const lastUpdate = online[hostname];
@@ -27,7 +27,7 @@ router.get('/online', function (ctx, next) {
     if (diff < 60 * 1000) {
       status = 'online';
     }
-    ctx.body += hostname + ': ' + status;
+    ctx.body[hostname] = status;
   }
 });
 
